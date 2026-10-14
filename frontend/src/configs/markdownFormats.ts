@@ -26,13 +26,12 @@ export const markdownFormats = {
     before: "*",
     after: "*",
   },
-
   underline: {
     label: "Underline",
     icon: Underline,
     type: "wrap",
-    before: "<u>",
-    after: "</u>",
+    before: "<ins>",
+    after: "</ins>",
   },
 
   strikethrough: {
