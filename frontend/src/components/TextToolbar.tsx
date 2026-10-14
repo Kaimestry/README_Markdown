@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import {
   Bold,
   ChevronsLeftRightEllipsis,
@@ -63,36 +61,38 @@ const headingTools: ToolbarItem[] = [
   },
 ];
 
-const codeTools: ToolbarItem[] = [
-  {
-    icon: ChevronsLeftRightEllipsis,
-    label: "Code Block",
-    action: "code-block",
-  },
-  {
-    icon: SquareText,
-    label: "Inline Code",
-    action: "inline-code",
-  },
-];
+type TextToolbarProps = {
+  onBold: () => void;
+  onItalic: () => void;
+  onUnderline: () => void;
+  onStrikethrough: () => void;
+  onInlineCode: () => void;
+  onCodeBlock: () => void;
+};
 
-export default function TextToolbar() {
-  const [activeTools, setActiveTools] = useState<string[]>([]);
-
-  const handleToolClick = (action: string) => {
-    setActiveTools((current) =>
-      current.includes(action)
-        ? current.filter((tool) => tool !== action)
-        : [...current, action],
-    );
+export default function TextToolbar({
+  onBold,
+  onItalic,
+  onUnderline,
+  onStrikethrough,
+  onInlineCode,
+  onCodeBlock,
+}: TextToolbarProps) {
+  const textHandlers: Record<string, () => void> = {
+    bold: onBold,
+    italic: onItalic,
+    underline: onUnderline,
+    strikethrough: onStrikethrough,
   };
 
-  const renderTools = (tools: ToolbarItem[]) =>
+  const renderTools = (
+    tools: ToolbarItem[],
+    handlers?: Record<string, () => void>,
+  ) =>
     tools.map((tool) => (
       <ToolbarButton
         key={tool.action}
-        active={activeTools.includes(tool.action)}
-        onClick={() => handleToolClick(tool.action)}
+        onClick={() => handlers?.[tool.action]?.()}
       >
         <Icon icon={tool.icon} />
       </ToolbarButton>
@@ -100,11 +100,16 @@ export default function TextToolbar() {
 
   return (
     <main className="bg-header flex justify-center gap-10 p-2 border-b border-border">
-      <div className="flex gap-5">{renderTools(textTools)}</div>
-
+      <div className="flex gap-5">{renderTools(textTools, textHandlers)}</div>
       <div className="flex gap-5">{renderTools(headingTools)}</div>
-
-      <div className="flex gap-5">{renderTools(codeTools)}</div>
+      <div className="flex gap-5">
+        <ToolbarButton onClick={onInlineCode}>
+          <Icon icon={ChevronsLeftRightEllipsis} />
+        </ToolbarButton>
+        <ToolbarButton onClick={onCodeBlock}>
+          <Icon icon={SquareText} />
+        </ToolbarButton>
+      </div>{" "}
     </main>
   );
 }

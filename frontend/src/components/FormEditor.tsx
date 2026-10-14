@@ -3,23 +3,36 @@ import { Check, Copy } from "lucide-react";
 import Container from "./Container";
 import EditorTextarea from "./EditorTextarea";
 import Icon from "./Icon";
-import useEditor from "../hooks/useEditor";
+
+type Selection = {
+  start: number;
+  end: number;
+};
 
 type FormEditorProps = {
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
+
+  textareaRef: React.RefObject<HTMLTextAreaElement | null>;
+  selection: Selection;
+
+  handleSelect: () => void;
+  handleInput: () => void;
+  handleCopy: (text: string) => void;
+
+  copied: boolean;
 };
 
-export default function FormEditor({ text, setText }: FormEditorProps) {
-  const {
-    textareaRef,
-    selection,
-    handleSelect,
-    handleInput,
-    handleCopy,
-    copied,
-  } = useEditor();
-
+export default function FormEditor({
+  text,
+  setText,
+  textareaRef,
+  selection,
+  handleSelect,
+  handleInput,
+  handleCopy,
+  copied,
+}: FormEditorProps) {
   const lineCount = text.split("\n").length;
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -38,7 +51,10 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             className="p-2 rounded-md hover:bg-border"
             aria-label={copied ? "Copied" : "Copy markdown"}
           >
-            <Icon icon={copied ? Check : Copy} />
+            <Icon
+              icon={copied ? Check : Copy}
+              color={copied ? "var(--color-green)" : "currentColor"}
+            />
           </button>
         </div>
       }
@@ -61,6 +77,7 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             ))}
           </div>
 
+          {/* Editor */}
           <EditorTextarea
             text={text}
             selection={selection}

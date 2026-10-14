@@ -11,9 +11,13 @@ export default function ToolbarButton({
 }: ToolbarButtonProps) {
   return (
     <button
-      onClick={onClick}
+      type="button"
+      onClick={() => {
+        console.log("BUTTON CLICKED");
+        onClick?.();
+      }}
       className={`
-        p-2 rounded-sm  hover:bg-background
+        p-2 rounded-sm hover:bg-background
         ${active ? "border-b border-[#F78166]" : "border-transparent"}
       `}
     >

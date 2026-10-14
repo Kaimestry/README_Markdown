@@ -55,7 +55,6 @@ export default function EditorTextarea({
         spellCheck={false}
         placeholder="Enter files content here"
         style={{
-          overflowX: "hidden",
           whiteSpace: "pre-wrap",
         }}
         className="
