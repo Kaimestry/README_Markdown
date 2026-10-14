@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-
-import { renderMarkdown } from "../../../backend/src/services/githubMarkdown";
 import Container from "./Container";
 
 type PreviewProps = {
@@ -8,24 +5,6 @@ type PreviewProps = {
 };
 
 export default function Preview({ text }: PreviewProps) {
-  const [html, setHtml] = useState("");
-
-  useEffect(() => {
-    const timer = setTimeout(async () => {
-      try {
-        const renderedHtml = await renderMarkdown(text);
-
-        setHtml(renderedHtml);
-      } catch (error) {
-        console.error("Failed to render Markdown:", error);
-      }
-    }, 300);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [text]);
-
   return (
     <Container
       header={
@@ -34,18 +13,9 @@ export default function Preview({ text }: PreviewProps) {
         </div>
       }
     >
-      <div
-        className="
-          m-5
-          pb-3
-          text-sm
-          text-text
-          wrap-anywhere
-        "
-        dangerouslySetInnerHTML={{
-          __html: html,
-        }}
-      />
+      <div className="m-5 pb-3 text-sm whitespace-pre-wrap wrap-anywhere">
+        {text}
+      </div>
     </Container>
   );
 }

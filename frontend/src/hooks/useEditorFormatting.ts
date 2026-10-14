@@ -15,7 +15,6 @@ export default function useEditorFormatting(
   setText: Dispatch<SetStateAction<string>>,
   textareaRef: React.RefObject<HTMLTextAreaElement | null>,
   selectionRef: React.RefObject<Selection>,
-  updateSelection: (selection: Selection) => void,
 ) {
   const applyFormat = (formatName: FormatName) => {
     const textarea = textareaRef.current;
@@ -32,16 +31,6 @@ export default function useEditorFormatting(
 
     requestAnimationFrame(() => {
       textarea.focus();
-
-      textarea.setSelectionRange(result.start, result.end);
-
-      updateSelection({
-        start: result.start,
-        end: result.end,
-      });
-
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
     });
   };
 

@@ -25,8 +25,13 @@ router.post("/", async (req, res) => {
     });
 
     if (!response.ok) {
+      const errorText = await response.text();
+
+      console.error("GitHub API error:", response.status, errorText);
+
       return res.status(response.status).json({
         error: "GitHub Markdown API request failed.",
+        details: errorText,
       });
     }
 

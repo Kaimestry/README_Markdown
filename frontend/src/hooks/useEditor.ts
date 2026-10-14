@@ -11,7 +11,7 @@ export default function useEditor(
 ) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const { selectionRef, selection, updateSelection, handleSelect } =
+  const { selectionRef, selection, handleSelect } =
     useEditorSelection(textareaRef);
 
   const { handleInput } = useEditorInput(textareaRef);
@@ -23,7 +23,6 @@ export default function useEditor(
     setText,
     textareaRef,
     selectionRef,
-    updateSelection,
   );
 
   return {
