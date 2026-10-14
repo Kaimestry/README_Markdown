@@ -9,7 +9,7 @@ export default function Preview() {
         </div>
       }
     >
-      <div className="text-lg">Readme Review</div>
+      <div className="text-lg pb-3">Readme Review</div>
     </Container>
   );
 }

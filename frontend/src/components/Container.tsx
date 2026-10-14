@@ -5,7 +5,7 @@ type ContainerProps = {
 
 export default function Container({ header, children }: ContainerProps) {
   return (
-    <main className="h-fit flex flex-col items-center rounded-lg w-full border border-border">
+    <main className="flex flex-col items-center rounded-lg w-full border border-border">
       <div className="bg-surface border-b rounded-t-lg border-border w-full">
         {header}
       </div>
