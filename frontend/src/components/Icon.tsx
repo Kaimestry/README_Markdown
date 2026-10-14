@@ -6,9 +6,17 @@ type IconProps = LucideProps & {
 
 export default function Icon({
   icon: IconComponent,
-  size = 18,
+  size = 20,
   strokeWidth = 2,
+  className = "text-subtext",
   ...props
 }: IconProps) {
-  return <IconComponent size={size} strokeWidth={strokeWidth} {...props} />;
+  return (
+    <IconComponent
+      size={size}
+      strokeWidth={strokeWidth}
+      className={className}
+      {...props}
+    />
+  );
 }
