@@ -99,7 +99,7 @@ export default function TextToolbar() {
     ));
 
   return (
-    <main className="bg-header flex justify-center gap-10 p-2 border-b-2 border-surface">
+    <main className="bg-header flex justify-center gap-10 p-2 border-b border-border">
       <div className="flex gap-5">{renderTools(textTools)}</div>
 
       <div className="flex gap-5">{renderTools(headingTools)}</div>

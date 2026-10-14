@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -10,7 +10,11 @@
   --color-text: #f0f6fc;
   --color-subtext: #9198a1;
 
+  --color-border: #3d444d;
+
   --color-green: #29903b;
+
+  --font-code: "JetBrains Mono", monospace;
 }
 
 body {
