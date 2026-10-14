@@ -1,10 +1,25 @@
+import { useEffect, useState } from "react";
+
 import Container from "./Container";
+import { renderMarkdown } from "../utils/markdownRenderer";
 
 type PreviewProps = {
   text: string;
 };
 
 export default function Preview({ text }: PreviewProps) {
+  const [html, setHtml] = useState("");
+
+  useEffect(() => {
+    const render = async () => {
+      const result = await renderMarkdown(text);
+
+      setHtml(result);
+    };
+
+    render();
+  }, [text]);
+
   return (
     <Container
       header={
@@ -13,9 +28,18 @@ export default function Preview({ text }: PreviewProps) {
         </div>
       }
     >
-      <div className="m-5 pb-3 text-sm whitespace-pre-wrap wrap-anywhere">
-        {text}
-      </div>
+      <div
+        className="
+          m-5
+          pb-3
+          text-sm
+          text-text
+          wrap-anywhere
+        "
+        dangerouslySetInnerHTML={{
+          __html: html,
+        }}
+      />
     </Container>
   );
 }
