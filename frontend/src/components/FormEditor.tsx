@@ -1,8 +1,7 @@
-import { Copy } from "lucide-react";
-import { useRef } from "react";
-
+import { Check, Copy } from "lucide-react";
 import Container from "./Container";
 import Icon from "./Icon";
+import useEditor from "../hooks/useEditor";
 
 type FormEditorProps = {
   text: string;
@@ -10,34 +9,11 @@ type FormEditorProps = {
 };
 
 export default function FormEditor({ text, setText }: FormEditorProps) {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  // Start with two actual lines:
-  // line 1 = empty
-  // line 2 = empty
-  // const [text, setText] = useState("");
+  const { textareaRef, handleInput, handleCopy, copied } = useEditor();
   const lineCount = text.split("\n").length;
-
-  const handleInput = () => {
-    const textarea = textareaRef.current;
-
-    if (!textarea) return;
-
-    textarea.style.height = "auto";
-    textarea.style.height = `${textarea.scrollHeight}px`;
-
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: "auto",
-    });
-  };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
-  };
-
-  const handleCopy = async () => {
-    await navigator.clipboard.writeText(text);
   };
 
   return (
@@ -48,18 +24,20 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
 
           <button
             type="button"
-            onClick={handleCopy}
+            onClick={() => handleCopy(text)}
             className="p-2 rounded-md hover:bg-border"
-            aria-label="Copy markdown"
+            aria-label={copied ? "Copied" : "Copy markdown"}
           >
-            <Icon icon={Copy} />
+            <Icon
+              icon={copied ? Check : Copy}
+              color={copied ? "var(--color-green)" : "currentColor"}
+            />
           </button>
         </div>
       }
     >
-      <form className="w-full py-5 px-3 ">
+      <form className="w-full py-5 px-3">
         <div className="flex w-full font-mono text-xs leading-relaxed">
-          {/* Line numbers */}
           <div
             className="
               shrink-0
@@ -75,7 +53,6 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             ))}
           </div>
 
-          {/* Editor */}
           <textarea
             ref={textareaRef}
             value={text}
@@ -84,25 +61,21 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             rows={1}
             spellCheck={false}
             placeholder="Enter files content here"
-            style={{
-              overflowX: "hidden",
-              whiteSpace: "pre-wrap",
-            }}
             className="
-                    block
-                    w-full
-                    resize-none
-                    bg-transparent
-                    border-none
-                    p-0
-                    font-mono
-                    text-xs
-                    leading-relaxed
-                    text-text
-                    outline-none
-                    focus:outline-none
-                    focus:ring-0
-  "
+              block
+              w-full
+              resize-none
+              bg-transparent
+              border-none
+              p-0
+              font-mono
+              text-xs
+              leading-relaxed
+              text-text
+              outline-none
+              focus:outline-none
+              focus:ring-0
+            "
           />
         </div>
       </form>
