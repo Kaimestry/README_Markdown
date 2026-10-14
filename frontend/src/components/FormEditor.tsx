@@ -58,7 +58,7 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
       }
     >
       <form className="w-full py-5 px-3 ">
-        <div className="flex w-full font-code text-xs leading-relaxed">
+        <div className="flex w-full font-mono text-xs leading-relaxed">
           {/* Line numbers */}
           <div
             className="
@@ -81,26 +81,28 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             value={text}
             onChange={handleChange}
             onInput={handleInput}
+            rows={1}
             spellCheck={false}
             placeholder="Enter files content here"
-            rows={1}
+            style={{
+              overflowX: "hidden",
+              whiteSpace: "pre-wrap",
+            }}
             className="
-              block
-              w-full
-              resize-none
-              overflow-hidden
-              bg-transparent
-              border-none
-              p-0
-              leading-relaxed
-              font-code
-              text-xs
-              text-text
-              outline-none
-              focus:outline-none
-              focus:ring-0
-              
-            "
+                    block
+                    w-full
+                    resize-none
+                    bg-transparent
+                    border-none
+                    p-0
+                    font-mono
+                    text-xs
+                    leading-relaxed
+                    text-text
+                    outline-none
+                    focus:outline-none
+                    focus:ring-0
+  "
           />
         </div>
       </form>
