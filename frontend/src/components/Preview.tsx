@@ -13,7 +13,9 @@ export default function Preview({ text }: PreviewProps) {
         </div>
       }
     >
-      <div className="m-5 min-h-5 text-sm whitespace-pre-wrap">{text}</div>
+      <div className="m-5 min-h-5 text-sm whitespace-pre-wrap wrap-anywhere">
+        {text}
+      </div>
     </Container>
   );
 }
