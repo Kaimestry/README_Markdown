@@ -3,8 +3,6 @@
 A small web app for people who want to style their `README.md` for GitHub, but forgot what Markdown syntax looks like or what it even does.
 Fun fact: i even made this readme using my project.
 
----
-
 ## Features
 
 - Markdown editor
@@ -13,8 +11,6 @@ Fun fact: i even made this readme using my project.
 - GitHub-Flavored Markdown
 
 > A completely unnecessary project that I made because I forgot Markdown syntax.
-
----
  
 ## Tech Stack
 
@@ -25,8 +21,6 @@ Fun fact: i even made this readme using my project.
 - Unified
 - Remark
 - Rehype
-
----
 
 ## Why?
 
@@ -39,8 +33,6 @@ Built from scratch in roughly **14 hours** because apparently that was a good us
 Also, I initially tried using the GitHub Markdown API before discovering the rate limit.
 
 So I ended up making my own Markdown rendering pipeline instead.
-
----
 
 ## License
 
