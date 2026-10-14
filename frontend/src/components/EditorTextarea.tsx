@@ -18,30 +18,78 @@ export default function EditorTextarea({
   handleInput,
   handleSelect,
 }: EditorTextareaProps) {
+  const lines = text.split("\n");
+
+  let characterIndex = 0;
+
   return (
     <div className="relative w-full">
-      {/* Highlight layer */}
+      {/* Visual editor */}
       <div
         aria-hidden="true"
         className="
-          absolute
-          inset-0
           pointer-events-none
-          whitespace-pre-wrap
-          break-word
+          w-full
           font-mono
           text-xs
           leading-relaxed
-          text-transparent
         "
       >
-        {text.slice(0, selection.start)}
+        {lines.map((line, index) => {
+          const lineStart = characterIndex;
+          const lineEnd = lineStart + line.length;
 
-        <span className="bg-link/40">
-          {text.slice(selection.start, selection.end)}
-        </span>
+          characterIndex += line.length + 1;
 
-        {text.slice(selection.end)}
+          const selectionStart = Math.max(selection.start - lineStart, 0);
+
+          const selectionEnd = Math.min(selection.end - lineStart, line.length);
+
+          const hasSelection =
+            selection.start < lineEnd && selection.end > lineStart;
+
+          return (
+            <div key={index} className="flex w-full">
+              {/* Line number */}
+              <div
+                className="
+                  w-12
+                  shrink-0
+                  select-none
+                  text-right
+                  pr-3
+                  text-border
+                "
+              >
+                {index + 1}
+              </div>
+
+              {/* Text */}
+              <div
+                className="
+                  min-w-0
+                  flex-1
+                  whitespace-pre-wrap
+                  break-normal
+                "
+              >
+                {hasSelection ? (
+                  <>
+                    {line.slice(0, selectionStart)}
+
+                    <span className="bg-link/40">
+                      {line.slice(selectionStart, selectionEnd)}
+                    </span>
+
+                    {line.slice(selectionEnd)}
+                  </>
+                ) : (
+                  line || "\u00A0"
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Actual textarea */}
@@ -52,23 +100,27 @@ export default function EditorTextarea({
         onInput={handleInput}
         onSelect={handleSelect}
         rows={1}
+        wrap="soft"
         spellCheck={false}
         placeholder="Enter files content here"
-        style={{
-          whiteSpace: "pre-wrap",
-        }}
         className="
-          relative
-          block
-          w-full
+          absolute
+          top-0
+          bottom-0
+          left-12
+          right-0
+          w-auto
+          h-full
           resize-none
+          overflow-hidden
           bg-transparent
           border-none
           p-0
           font-mono
           text-xs
           leading-relaxed
-          text-text
+          text-transparent
+          caret-text
           outline-none
           focus:outline-none
           focus:ring-0

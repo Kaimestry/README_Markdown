@@ -23,7 +23,7 @@ const toolbarItems: FormatName[] = [
 
 export default function TextToolbar({ onFormat }: TextToolbarProps) {
   return (
-    <div className="flex gap-5 justify-center p-3 bg-header border-b border-border">
+    <div className="flex gap-5 justify-center p-2 bg-header border-b border-border sticky top-0 z-50 ">
       {toolbarItems.map((formatName) => {
         const format = markdownFormats[formatName];
 

@@ -33,8 +33,6 @@ export default function FormEditor({
   handleCopy,
   copied,
 }: FormEditorProps) {
-  const lineCount = text.split("\n").length;
-
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
   };
@@ -61,23 +59,6 @@ export default function FormEditor({
     >
       <form className="w-full py-5 px-3">
         <div className="flex w-full font-mono text-xs leading-relaxed">
-          {/* Line numbers */}
-          <div
-            className="
-              shrink-0
-              select-none
-              text-right
-              pr-3
-              text-border
-            "
-            aria-hidden="true"
-          >
-            {Array.from({ length: lineCount }, (_, index) => (
-              <div key={index}>{index + 1}</div>
-            ))}
-          </div>
-
-          {/* Editor */}
           <EditorTextarea
             text={text}
             selection={selection}

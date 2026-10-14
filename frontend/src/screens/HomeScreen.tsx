@@ -22,8 +22,8 @@ export default function HomeScreen() {
     <main className="min-h-screen bg-background flex flex-col gap-10">
       <TextToolbar onFormat={applyFormat} />
 
-      <div className="flex gap-5 mx-5 items-start">
-        <div className="flex-1 min-w-0">
+      <div className="flex gap-5 mx-5 items-stretch">
+        <div className="flex-1 min-w-0 h-full">
           <FormEditor
             text={text}
             setText={setText}
@@ -35,8 +35,7 @@ export default function HomeScreen() {
             copied={copied}
           />
         </div>
-
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 h-full">
           <Preview text={text} />
         </div>
       </div>
