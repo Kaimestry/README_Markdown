@@ -7,9 +7,10 @@ import Icon from "./Icon";
 export default function FormEditor() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // The editor always keeps one extra newline at the end
-  const [text, setText] = useState("\n");
-
+  // Start with two actual lines:
+  // line 1 = empty
+  // line 2 = empty
+  const [text, setText] = useState("");
   const lineCount = text.split("\n").length;
 
   const handleInput = () => {
@@ -27,21 +28,11 @@ export default function FormEditor() {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    let value = event.target.value;
-
-    // Always keep one empty line after the user's content
-    if (!value.endsWith("\n")) {
-      value += "\n";
-    }
-
-    setText(value);
+    setText(event.target.value);
   };
 
   const handleCopy = async () => {
-    // Remove the editor-only trailing newline
-    const markdown = text.replace(/\n$/, "");
-
-    await navigator.clipboard.writeText(markdown);
+    await navigator.clipboard.writeText(text);
   };
 
   return (
@@ -86,6 +77,8 @@ export default function FormEditor() {
             onChange={handleChange}
             onInput={handleInput}
             spellCheck={false}
+            placeholder="Enter files content here"
+            rows={1}
             className="
               block
               w-full
@@ -94,13 +87,14 @@ export default function FormEditor() {
               bg-transparent
               border-none
               p-0
+              leading-relaxed
               font-code
               text-xs
-              leading-relaxed
               text-text
               outline-none
               focus:outline-none
               focus:ring-0
+              
             "
           />
         </div>
