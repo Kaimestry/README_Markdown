@@ -45,7 +45,7 @@ export const markdownFormats = {
 
   "inline-code": {
     label: "Inline Code",
-    icon: SquareText,
+    icon: ChevronsLeftRightEllipsis,
     type: "wrap",
     before: "`",
     after: "`",
@@ -74,7 +74,7 @@ export const markdownFormats = {
 
   "code-block": {
     label: "Code Block",
-    icon: ChevronsLeftRightEllipsis,
+    icon: SquareText,
     type: "block",
     before: "```",
     after: "```",

@@ -13,11 +13,10 @@ export default function ToolbarButton({
     <button
       type="button"
       onClick={() => {
-        console.log("BUTTON CLICKED");
         onClick?.();
       }}
       className={`
-        p-2 rounded-sm hover:bg-background
+        p-2 rounded-sm hover:bg-subtext/40
         ${active ? "border-b border-[#F78166]" : "border-transparent"}
       `}
     >

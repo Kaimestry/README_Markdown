@@ -17,8 +17,8 @@ const toolbarItems: FormatName[] = [
   "heading-1",
   "heading-2",
   "heading-3",
-  "code-block",
   "inline-code",
+  "code-block",
 ];
 
 export default function TextToolbar({ onFormat }: TextToolbarProps) {
