@@ -34,7 +34,23 @@ export default function FormEditor({
   copied,
 }: FormEditorProps) {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
+    const textarea = event.target;
+
+    const scrollTop = textarea.scrollTop;
+    const scrollLeft = textarea.scrollLeft;
+
+    console.log({
+      selectionStart: textarea.selectionStart,
+      selectionEnd: textarea.selectionEnd,
+      scrollTop: textarea.scrollTop,
+    });
+
+    setText(textarea.value);
+
+    requestAnimationFrame(() => {
+      textarea.scrollTop = scrollTop;
+      textarea.scrollLeft = scrollLeft;
+    });
   };
 
   return (

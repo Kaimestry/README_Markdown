@@ -4,10 +4,10 @@ import FormEditor from "../components/FormEditor";
 import Preview from "../components/Preview";
 import TextToolbar from "../components/TextToolbar";
 import useEditor from "../hooks/useEditor";
+import sampleMarkdown from "../data/sampleMarkdown";
 
 export default function HomeScreen() {
-  const [text, setText] = useState("");
-
+  const [text, setText] = useState(sampleMarkdown);
   const {
     textareaRef,
     selection,

@@ -106,7 +106,6 @@ export default function EditorTextarea({
         className="
           absolute
           top-0
-          bottom-0
           left-12
           right-0
           w-auto

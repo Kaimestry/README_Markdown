@@ -28,10 +28,6 @@ export default function useEditorFormatting(
     const result = applyMarkdownFormat(text, start, end, format);
 
     setText(result.text);
-
-    requestAnimationFrame(() => {
-      textarea.focus();
-    });
   };
 
   return {
