@@ -21,6 +21,9 @@ export default function HomeScreen() {
     toggleStrikethrough,
     toggleInlineCode,
     toggleCodeBlock,
+    toggleHeading1,
+    toggleHeading2,
+    toggleHeading3,
   } = useEditor(text, setText);
 
   return (
@@ -32,6 +35,9 @@ export default function HomeScreen() {
         onStrikethrough={toggleStrikethrough}
         onInlineCode={toggleInlineCode}
         onCodeBlock={toggleCodeBlock}
+        onHeading1={toggleHeading1}
+        onHeading2={toggleHeading2}
+        onHeading3={toggleHeading3}
       />
 
       <div className="flex gap-5 mx-5 items-start">

@@ -25,6 +25,9 @@ export default function useEditor(
     toggleStrikethrough,
     toggleInlineCode,
     toggleCodeBlock,
+    toggleHeading1,
+    toggleHeading2,
+    toggleHeading3,
   } = useEditorFormatting(
     text,
     setText,
@@ -51,5 +54,8 @@ export default function useEditor(
     toggleStrikethrough,
     toggleInlineCode,
     toggleCodeBlock,
+    toggleHeading1,
+    toggleHeading2,
+    toggleHeading3,
   };
 }
