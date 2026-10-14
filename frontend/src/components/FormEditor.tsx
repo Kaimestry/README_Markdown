@@ -1,5 +1,7 @@
 import { Check, Copy } from "lucide-react";
+
 import Container from "./Container";
+import EditorTextarea from "./EditorTextarea";
 import Icon from "./Icon";
 import useEditor from "../hooks/useEditor";
 
@@ -9,7 +11,15 @@ type FormEditorProps = {
 };
 
 export default function FormEditor({ text, setText }: FormEditorProps) {
-  const { textareaRef, handleInput, handleCopy, copied } = useEditor();
+  const {
+    textareaRef,
+    selection,
+    handleSelect,
+    handleInput,
+    handleCopy,
+    copied,
+  } = useEditor();
+
   const lineCount = text.split("\n").length;
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,16 +38,14 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             className="p-2 rounded-md hover:bg-border"
             aria-label={copied ? "Copied" : "Copy markdown"}
           >
-            <Icon
-              icon={copied ? Check : Copy}
-              color={copied ? "var(--color-green)" : "currentColor"}
-            />
+            <Icon icon={copied ? Check : Copy} />
           </button>
         </div>
       }
     >
       <form className="w-full py-5 px-3">
         <div className="flex w-full font-mono text-xs leading-relaxed">
+          {/* Line numbers */}
           <div
             className="
               shrink-0
@@ -53,29 +61,13 @@ export default function FormEditor({ text, setText }: FormEditorProps) {
             ))}
           </div>
 
-          <textarea
-            ref={textareaRef}
-            value={text}
-            onChange={handleChange}
-            onInput={handleInput}
-            rows={1}
-            spellCheck={false}
-            placeholder="Enter files content here"
-            className="
-              block
-              w-full
-              resize-none
-              bg-transparent
-              border-none
-              p-0
-              font-mono
-              text-xs
-              leading-relaxed
-              text-text
-              outline-none
-              focus:outline-none
-              focus:ring-0
-            "
+          <EditorTextarea
+            text={text}
+            selection={selection}
+            textareaRef={textareaRef}
+            handleChange={handleChange}
+            handleInput={handleInput}
+            handleSelect={handleSelect}
           />
         </div>
       </form>
