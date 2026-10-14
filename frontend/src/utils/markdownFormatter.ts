@@ -8,7 +8,54 @@ export function applyMarkdownFormat(
   end: number,
   format: MarkdownFormat,
 ) {
-  if (format.type === "wrap" || format.type === "block") {
+  /*
+   * Inline / wrapping formats
+   */
+  if (format.type === "wrap") {
+    let selectionStart = start;
+    let selectionEnd = end;
+
+    /*
+     * Don't include a trailing newline in an inline format.
+     *
+     * Example:
+     *
+     * hello world\n
+     *            ^
+     *
+     * should become:
+     *
+     * **hello world**
+     *
+     * rather than:
+     *
+     * **hello world
+     * **
+     */
+    if (selectionEnd > selectionStart && text[selectionEnd - 1] === "\n") {
+      selectionEnd -= 1;
+    }
+
+    const selectedText = text.slice(selectionStart, selectionEnd);
+
+    const newText =
+      text.slice(0, selectionStart) +
+      format.before +
+      selectedText +
+      format.after +
+      text.slice(selectionEnd);
+
+    return {
+      text: newText,
+      start: selectionStart + format.before.length,
+      end: selectionEnd + format.before.length,
+    };
+  }
+
+  /*
+   * Block formats
+   */
+  if (format.type === "block") {
     const selectedText = text.slice(start, end);
 
     const newText =
@@ -25,6 +72,9 @@ export function applyMarkdownFormat(
     };
   }
 
+  /*
+   * Headings
+   */
   if (format.type === "heading") {
     const lineStart = text.lastIndexOf("\n", start - 1) + 1;
 
@@ -50,10 +100,12 @@ export function applyMarkdownFormat(
     const lengthDifference = formattedLines.length - selectedLines.length;
 
     let newStart = start + lengthDifference;
+
     let newEnd = end + lengthDifference;
 
     if (start === end) {
       newStart = start + marker.length;
+
       newEnd = newStart;
     }
 
