@@ -3,7 +3,7 @@
 A small web app for people who want to style their `README.md` for GitHub, but forgot what Markdown syntax looks like or what it even does.
 Fun fact: i even made this readme using my project.
 
-Access Demo here if u dont wanna fork the repo: `readme-markdown-6417fkop1-kaimestrys-projects.vercel.app`
+Access Demo here if u dont wanna fork the repo: `https://readme-markdown.vercel.app/`
 
 ## Features
 
