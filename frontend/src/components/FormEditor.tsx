@@ -1,16 +1,21 @@
 import { Copy } from "lucide-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import Container from "./Container";
 import Icon from "./Icon";
 
-export default function FormEditor() {
+type FormEditorProps = {
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function FormEditor({ text, setText }: FormEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Start with two actual lines:
   // line 1 = empty
   // line 2 = empty
-  const [text, setText] = useState("");
+  // const [text, setText] = useState("");
   const lineCount = text.split("\n").length;
 
   const handleInput = () => {
@@ -52,7 +57,7 @@ export default function FormEditor() {
         </div>
       }
     >
-      <form className="w-full py-2">
+      <form className="w-full py-5 px-3 ">
         <div className="flex w-full font-code text-xs leading-relaxed">
           {/* Line numbers */}
           <div

@@ -10,7 +10,7 @@ export default function Container({ header, children }: ContainerProps) {
         {header}
       </div>
 
-      <div className="w-full p-3">{children}</div>
+      <div className="w-full">{children}</div>
     </main>
   );
 }

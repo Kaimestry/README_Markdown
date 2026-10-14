@@ -1,6 +1,10 @@
 import Container from "./Container";
 
-export default function Preview() {
+type PreviewProps = {
+  text: string;
+};
+
+export default function Preview({ text }: PreviewProps) {
   return (
     <Container
       header={
@@ -9,7 +13,7 @@ export default function Preview() {
         </div>
       }
     >
-      <div className="text-lg m-3 border">Readme Review</div>
+      <div className="m-5 min-h-5 text-sm whitespace-pre-wrap">{text}</div>
     </Container>
   );
 }
