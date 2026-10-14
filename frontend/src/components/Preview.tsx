@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import Container from "./Container";
 import { renderMarkdown } from "../utils/markdownRenderer";
+import "../styles/markdownPreview.css";
 
 type PreviewProps = {
   text: string;
@@ -35,6 +36,7 @@ export default function Preview({ text }: PreviewProps) {
           text-sm
           text-text
           wrap-anywhere
+          markdown-preview
         "
         dangerouslySetInnerHTML={{
           __html: html,
