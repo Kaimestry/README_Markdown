@@ -1,128 +1,38 @@
-import {
-  Bold,
-  ChevronsLeftRightEllipsis,
-  Heading1,
-  Heading2,
-  Heading3,
-  Italic,
-  SquareText,
-  Strikethrough,
-  Underline,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { markdownFormats } from "../configs/markdownFormats";
 
 import Icon from "./Icon";
 import ToolbarButton from "./ToolbarButton";
 
-type ToolbarItem = {
-  icon: LucideIcon;
-  label: string;
-  action: string;
-};
-
-const textTools: ToolbarItem[] = [
-  {
-    icon: Bold,
-    label: "Bold",
-    action: "bold",
-  },
-  {
-    icon: Italic,
-    label: "Italic",
-    action: "italic",
-  },
-  {
-    icon: Underline,
-    label: "Underline",
-    action: "underline",
-  },
-  {
-    icon: Strikethrough,
-    label: "Strikethrough",
-    action: "strikethrough",
-  },
-];
-
-const headingTools: ToolbarItem[] = [
-  {
-    icon: Heading1,
-    label: "Heading 1",
-    action: "heading-1",
-  },
-  {
-    icon: Heading2,
-    label: "Heading 2",
-    action: "heading-2",
-  },
-  {
-    icon: Heading3,
-    label: "Heading 3",
-    action: "heading-3",
-  },
-];
+type FormatName = keyof typeof markdownFormats;
 
 type TextToolbarProps = {
-  onBold: () => void;
-  onItalic: () => void;
-  onUnderline: () => void;
-  onStrikethrough: () => void;
-  onInlineCode: () => void;
-  onCodeBlock: () => void;
-  onHeading1: () => void;
-  onHeading2: () => void;
-  onHeading3: () => void;
+  onFormat: (format: FormatName) => void;
 };
 
-export default function TextToolbar({
-  onBold,
-  onItalic,
-  onUnderline,
-  onStrikethrough,
-  onInlineCode,
-  onCodeBlock,
-  onHeading1,
-  onHeading2,
-  onHeading3,
-}: TextToolbarProps) {
-  const textHandlers: Record<string, () => void> = {
-    bold: onBold,
-    italic: onItalic,
-    underline: onUnderline,
-    strikethrough: onStrikethrough,
-  };
-  const headingHandlers: Record<string, () => void> = {
-    "heading-1": onHeading1,
-    "heading-2": onHeading2,
-    "heading-3": onHeading3,
-  };
+const toolbarItems: FormatName[] = [
+  "bold",
+  "italic",
+  "underline",
+  "strikethrough",
+  "heading-1",
+  "heading-2",
+  "heading-3",
+  "code-block",
+  "inline-code",
+];
 
-  const renderTools = (
-    tools: ToolbarItem[],
-    handlers?: Record<string, () => void>,
-  ) =>
-    tools.map((tool) => (
-      <ToolbarButton
-        key={tool.action}
-        onClick={() => handlers?.[tool.action]?.()}
-      >
-        <Icon icon={tool.icon} />
-      </ToolbarButton>
-    ));
-
+export default function TextToolbar({ onFormat }: TextToolbarProps) {
   return (
-    <main className="bg-header flex justify-center gap-10 p-2 border-b border-border">
-      <div className="flex gap-5">{renderTools(textTools, textHandlers)}</div>
-      <div className="flex gap-5">
-        {renderTools(headingTools, headingHandlers)}
-      </div>
-      <div className="flex gap-5">
-        <ToolbarButton onClick={onInlineCode}>
-          <Icon icon={ChevronsLeftRightEllipsis} />
-        </ToolbarButton>
-        <ToolbarButton onClick={onCodeBlock}>
-          <Icon icon={SquareText} />
-        </ToolbarButton>
-      </div>{" "}
-    </main>
+    <div className="flex gap-5 justify-center p-3 bg-header border-b border-border">
+      {toolbarItems.map((formatName) => {
+        const format = markdownFormats[formatName];
+
+        return (
+          <ToolbarButton key={formatName} onClick={() => onFormat(formatName)}>
+            <Icon icon={format.icon} />
+          </ToolbarButton>
+        );
+      })}
+    </div>
   );
 }

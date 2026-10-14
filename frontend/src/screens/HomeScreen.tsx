@@ -15,30 +15,12 @@ export default function HomeScreen() {
     handleInput,
     handleCopy,
     copied,
-    toggleBold,
-    toggleItalic,
-    toggleUnderline,
-    toggleStrikethrough,
-    toggleInlineCode,
-    toggleCodeBlock,
-    toggleHeading1,
-    toggleHeading2,
-    toggleHeading3,
+    applyFormat,
   } = useEditor(text, setText);
 
   return (
-    <main className="min-h-screen bg-black flex flex-col gap-10">
-      <TextToolbar
-        onBold={toggleBold}
-        onItalic={toggleItalic}
-        onUnderline={toggleUnderline}
-        onStrikethrough={toggleStrikethrough}
-        onInlineCode={toggleInlineCode}
-        onCodeBlock={toggleCodeBlock}
-        onHeading1={toggleHeading1}
-        onHeading2={toggleHeading2}
-        onHeading3={toggleHeading3}
-      />
+    <main className="min-h-screen bg-background flex flex-col gap-10">
+      <TextToolbar onFormat={applyFormat} />
 
       <div className="flex gap-5 mx-5 items-start">
         <div className="flex-1 min-w-0">

@@ -18,17 +18,7 @@ export default function useEditor(
 
   const { copied, handleCopy } = useClipboard();
 
-  const {
-    toggleBold,
-    toggleItalic,
-    toggleUnderline,
-    toggleStrikethrough,
-    toggleInlineCode,
-    toggleCodeBlock,
-    toggleHeading1,
-    toggleHeading2,
-    toggleHeading3,
-  } = useEditorFormatting(
+  const { applyFormat } = useEditorFormatting(
     text,
     setText,
     textareaRef,
@@ -48,14 +38,6 @@ export default function useEditor(
     copied,
     handleCopy,
 
-    toggleBold,
-    toggleItalic,
-    toggleUnderline,
-    toggleStrikethrough,
-    toggleInlineCode,
-    toggleCodeBlock,
-    toggleHeading1,
-    toggleHeading2,
-    toggleHeading3,
+    applyFormat,
   };
 }
