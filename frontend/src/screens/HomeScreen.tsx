@@ -12,6 +12,26 @@ export default function HomeScreen() {
   const [tableRows, setTableRows] = useState(4);
   const [tableColumns, setTableColumns] = useState(3);
 
+  const handleInsertTable = (table: string) => {
+    const textarea = textareaRef.current;
+
+    if (!textarea) return;
+
+    const { start, end } = selection;
+
+    const before = text.slice(0, start);
+    const after = text.slice(end);
+
+    const insertion =
+      `${before.endsWith("\n") ? "" : "\n"}` +
+      table +
+      `${after.startsWith("\n") ? "" : "\n"}`;
+
+    setText(before + insertion + after);
+
+    setShowTableModal(false);
+  };
+
   const {
     textareaRef,
     selection,
@@ -55,7 +75,7 @@ export default function HomeScreen() {
           onRowsChange={setTableRows}
           onColumnsChange={setTableColumns}
           onClose={() => setShowTableModal(false)}
-          onInsert={() => {}}
+          onInsert={handleInsertTable}
         />
       )}
     </main>

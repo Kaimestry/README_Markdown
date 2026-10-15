@@ -1,4 +1,4 @@
-import { Table } from "lucide-react";
+import { Table2 } from "lucide-react";
 import { markdownFormats } from "../configs/markdownFormats";
 
 import Icon from "./Icon";
@@ -48,7 +48,7 @@ export default function TextToolbar({
       })}
 
       <ToolbarButton onClick={onInsertTable}>
-        <Icon icon={Table} />
+        <Icon icon={Table2} />
       </ToolbarButton>
     </div>
   );

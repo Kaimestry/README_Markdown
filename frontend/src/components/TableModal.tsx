@@ -5,6 +5,7 @@ import Icon from "./Icon";
 import TableSettings from "./TableSettings";
 import { useEffect, useState } from "react";
 import TableEditor from "./TableEditor";
+import { generateMarkdownTable } from "../utils/markdownTable";
 
 type TableModalProps = {
   rows: number;
@@ -12,7 +13,7 @@ type TableModalProps = {
   onRowsChange: (rows: number) => void;
   onColumnsChange: (columns: number) => void;
   onClose: () => void;
-  onInsert: () => void;
+  onInsert: (table: string) => void;
 };
 
 function createTableCells(rows: number, columns: number) {
@@ -110,7 +111,7 @@ export default function TableModal({
 
             <button
               type="button"
-              onClick={onInsert}
+              onClick={() => onInsert(generateMarkdownTable(cells))}
               className="rounded-md bg-green px-4 py-2 text-sm font-medium text-white hover:opacity-90"
             >
               Insert table

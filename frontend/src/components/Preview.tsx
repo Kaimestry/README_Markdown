@@ -29,18 +29,19 @@ export default function Preview({ text }: PreviewProps) {
         </div>
       }
     >
-      <div
-        className="
-          m-5
-          text-sm
-          text-text
-          wrap-anywhere
-          markdown-preview
-        "
-        dangerouslySetInnerHTML={{
-          __html: html,
-        }}
-      />
+      <div className="m-5 overflow-x-auto">
+        <div
+          className="
+      text-sm
+      text-text
+      markdown-preview
+      min-w-0
+    "
+          dangerouslySetInnerHTML={{
+            __html: html,
+          }}
+        />
+      </div>
     </Container>
   );
 }

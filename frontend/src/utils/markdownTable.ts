@@ -1,4 +1,8 @@
 export function generateMarkdownTable(cells: string[][]): string {
+  if (cells.length === 0) {
+    return "";
+  }
+
   const header = cells[0];
 
   const separator = header.map(() => "---");
