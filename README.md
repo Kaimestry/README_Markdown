@@ -40,4 +40,5 @@ So I ended up making my own Markdown rendering pipeline instead.
 
 Personal project.
 
-<img width="1881" height="993" alt="image" src="https://github.com/user-attachments/assets/d049d8d1-157e-4523-a411-5b117aca4a17" />
+<img width="1897" height="937" alt="image" src="https://github.com/user-attachments/assets/82fce2f6-774a-40c6-8f41-36eae2c24ea0" />
+
