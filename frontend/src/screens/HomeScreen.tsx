@@ -19,7 +19,7 @@ export default function HomeScreen() {
   } = useEditor(text, setText);
 
   return (
-    <main className="min-h-screen bg-background flex flex-col gap-10">
+    <main className="min-h-screen bg-background flex flex-col gap-10 pb-10">
       <TextToolbar onFormat={applyFormat} />
 
       <div className="flex gap-5 mx-5 items-stretch">

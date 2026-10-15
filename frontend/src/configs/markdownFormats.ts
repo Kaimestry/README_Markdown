@@ -8,6 +8,9 @@ import {
   Heading3,
   SquareText,
   ChevronsLeftRightEllipsis,
+  Superscript,
+  Subscript,
+  Quote,
 } from "lucide-react";
 
 export const markdownFormats = {
@@ -32,6 +35,21 @@ export const markdownFormats = {
     type: "wrap",
     before: "<ins>",
     after: "</ins>",
+  },
+
+  subscript: {
+    label: "Subscript",
+    icon: Subscript,
+    type: "wrap",
+    before: "<sub>",
+    after: "</sub>",
+  },
+  superscript: {
+    label: "Superscript",
+    icon: Superscript,
+    type: "wrap",
+    before: "<sup>",
+    after: "</sup>",
   },
 
   strikethrough: {
@@ -77,5 +95,12 @@ export const markdownFormats = {
     type: "block",
     before: "```",
     after: "```",
+  },
+
+  quote: {
+    label: "Quote",
+    icon: Quote,
+    type: "quote",
+    before: "> ",
   },
 } as const;

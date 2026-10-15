@@ -14,11 +14,14 @@ const toolbarItems: FormatName[] = [
   "italic",
   "underline",
   "strikethrough",
+  "subscript",
+  "superscript",
   "heading-1",
   "heading-2",
   "heading-3",
   "inline-code",
   "code-block",
+  "quote",
 ];
 
 export default function TextToolbar({ onFormat }: TextToolbarProps) {

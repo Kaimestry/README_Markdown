@@ -116,6 +116,35 @@ export function applyMarkdownFormat(
     };
   }
 
+  /*
+  QUOTE
+  */
+
+  if (format.type === "quote") {
+    const lineStart = text.lastIndexOf("\n", start - 1) + 1;
+
+    const lineEndIndex = text.indexOf("\n", end);
+
+    const lineEnd = lineEndIndex === -1 ? text.length : lineEndIndex;
+
+    const selectedText = text.slice(lineStart, lineEnd);
+
+    const quotedText = selectedText
+      .split("\n")
+      .map((line) => `> ${line}`)
+      .join("\n");
+
+    const newText = text.slice(0, lineStart) + quotedText + text.slice(lineEnd);
+
+    const lengthDifference = quotedText.length - selectedText.length;
+
+    return {
+      text: newText,
+      start: start + lengthDifference,
+      end: end + lengthDifference,
+    };
+  }
+
   return {
     text,
     start,
