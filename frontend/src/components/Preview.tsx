@@ -32,7 +32,6 @@ export default function Preview({ text }: PreviewProps) {
       <div
         className="
           m-5
-          pb-3
           text-sm
           text-text
           wrap-anywhere

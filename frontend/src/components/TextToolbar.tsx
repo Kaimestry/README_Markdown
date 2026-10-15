@@ -1,3 +1,4 @@
+import { Table } from "lucide-react";
 import { markdownFormats } from "../configs/markdownFormats";
 
 import Icon from "./Icon";
@@ -7,6 +8,7 @@ type FormatName = keyof typeof markdownFormats;
 
 type TextToolbarProps = {
   onFormat: (format: FormatName) => void;
+  onInsertTable: () => void;
 };
 
 const toolbarItems: FormatName[] = [
@@ -29,7 +31,10 @@ const toolbarItems: FormatName[] = [
   "escape",
 ];
 
-export default function TextToolbar({ onFormat }: TextToolbarProps) {
+export default function TextToolbar({
+  onFormat,
+  onInsertTable,
+}: TextToolbarProps) {
   return (
     <div className="flex gap-5 justify-center p-2 bg-header border-b border-border sticky top-0 z-50 ">
       {toolbarItems.map((formatName) => {
@@ -41,6 +46,10 @@ export default function TextToolbar({ onFormat }: TextToolbarProps) {
           </ToolbarButton>
         );
       })}
+
+      <ToolbarButton onClick={onInsertTable}>
+        <Icon icon={Table} />
+      </ToolbarButton>
     </div>
   );
 }
