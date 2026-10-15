@@ -22,6 +22,11 @@ const toolbarItems: FormatName[] = [
   "inline-code",
   "code-block",
   "quote",
+  "link",
+  "unordered-list",
+  "ordered-list",
+  "task-list",
+  "escape",
 ];
 
 export default function TextToolbar({ onFormat }: TextToolbarProps) {

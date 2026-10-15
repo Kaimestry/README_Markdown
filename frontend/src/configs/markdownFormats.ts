@@ -11,6 +11,12 @@ import {
   Superscript,
   Subscript,
   Quote,
+  Link,
+  List,
+  ListOrdered,
+  SquareCheck,
+  StickyNoteX,
+  MessageCircleCode,
 } from "lucide-react";
 
 export const markdownFormats = {
@@ -59,7 +65,19 @@ export const markdownFormats = {
     before: "~~",
     after: "~~",
   },
-
+  comment: {
+    label: "Comment",
+    icon: MessageCircleCode,
+    type: "wrap",
+    before: "<!--",
+    after: "-->",
+  },
+  escape: {
+    label: "Escape Markdown",
+    icon: StickyNoteX,
+    type: "escape",
+    before: "\\",
+  },
   "inline-code": {
     label: "Inline Code",
     icon: ChevronsLeftRightEllipsis,
@@ -102,5 +120,30 @@ export const markdownFormats = {
     icon: Quote,
     type: "quote",
     before: "> ",
+  },
+
+  link: {
+    label: "Link",
+    icon: Link,
+    type: "link",
+  },
+
+  "unordered-list": {
+    label: "Unordered List",
+    icon: List,
+    type: "list",
+    marker: "- ",
+  },
+
+  "ordered-list": {
+    label: "Ordered List",
+    icon: ListOrdered,
+    type: "list",
+    marker: "1. ",
+  },
+  "task-list": {
+    label: "Task List",
+    icon: SquareCheck,
+    type: "task-list",
   },
 } as const;
