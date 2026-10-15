@@ -104,9 +104,9 @@ export default function EditorTextarea({
         spellCheck={false}
         placeholder="Enter files content here"
         className="
+        placeholder:text-subtext
           absolute
           top-0
-          bottom-0
           left-12
           right-0
           w-auto

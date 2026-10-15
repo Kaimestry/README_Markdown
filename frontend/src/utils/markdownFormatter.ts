@@ -116,6 +116,162 @@ export function applyMarkdownFormat(
     };
   }
 
+  /*
+  QUOTE
+  */
+  if (format.type === "quote") {
+    const lineStart = text.lastIndexOf("\n", start - 1) + 1;
+
+    const lineEndIndex = text.indexOf("\n", end);
+
+    const lineEnd = lineEndIndex === -1 ? text.length : lineEndIndex;
+
+    const selectedText = text.slice(lineStart, lineEnd);
+
+    const quotedText = selectedText
+      .split("\n")
+      .map((line) => `> ${line}`)
+      .join("\n");
+
+    const newText = text.slice(0, lineStart) + quotedText + text.slice(lineEnd);
+
+    const lengthDifference = quotedText.length - selectedText.length;
+
+    return {
+      text: newText,
+      start: start + lengthDifference,
+      end: end + lengthDifference,
+    };
+  }
+
+  /*
+  links
+  */
+  if (format.type === "link") {
+    const selectedText = text.slice(start, end);
+
+    const isUrl = /^https?:\/\//i.test(selectedText);
+
+    let newText: string;
+    let newStart: number;
+    let newEnd: number;
+
+    if (selectedText === "") {
+      newText =
+        text.slice(0, start) + "[Label](https://insertlink)" + text.slice(end);
+
+      newStart = start + 1;
+      newEnd = start + 6;
+    } else if (isUrl) {
+      const replacement = `[Label](${selectedText})`;
+
+      newText = text.slice(0, start) + replacement + text.slice(end);
+
+      newStart = start + 1;
+      newEnd = start + 6;
+    } else {
+      const replacement = `[${selectedText}](https://insertlink)`;
+
+      newText = text.slice(0, start) + replacement + text.slice(end);
+
+      newStart = start + 1;
+      newEnd = start + 1 + selectedText.length;
+    }
+
+    return {
+      text: newText,
+      start: newStart,
+      end: newEnd,
+    };
+  }
+
+  //list
+  if (format.type === "list") {
+    const lineStart = text.lastIndexOf("\n", start - 1) + 1;
+
+    const lineEndIndex = text.indexOf("\n", end);
+
+    const lineEnd = lineEndIndex === -1 ? text.length : lineEndIndex;
+
+    const selectedText = text.slice(lineStart, lineEnd);
+
+    const lines = selectedText.split("\n");
+
+    const formattedLines = lines.map((line, index) => {
+      // Remove an existing list marker
+      const cleanLine = line.replace(/^(?:[-*+]|\d+\.)\s+/, "");
+
+      if (format.marker === "- ") {
+        return `- ${cleanLine}`;
+      }
+
+      return `${index + 1}. ${cleanLine}`;
+    });
+
+    const formattedText = formattedLines.join("\n");
+
+    const newText =
+      text.slice(0, lineStart) + formattedText + text.slice(lineEnd);
+
+    const lengthDifference = formattedText.length - selectedText.length;
+
+    return {
+      text: newText,
+      start: start + lengthDifference,
+      end: end + lengthDifference,
+    };
+  }
+
+  if (format.type === "task-list") {
+    const lineStart = text.lastIndexOf("\n", start - 1) + 1;
+
+    const lineEndIndex = text.indexOf("\n", end);
+
+    const lineEnd = lineEndIndex === -1 ? text.length : lineEndIndex;
+
+    const selectedText = text.slice(lineStart, lineEnd);
+
+    const lines = selectedText.split("\n");
+
+    const formattedLines = lines.map((line) => {
+      // Remove an existing task marker
+      const cleanLine = line.replace(/^[-*+]\s+(?:\[[ xX]\]\s+)?/, "");
+
+      return `- [ ] ${cleanLine}`;
+    });
+
+    const formattedText = formattedLines.join("\n");
+
+    const newText =
+      text.slice(0, lineStart) + formattedText + text.slice(lineEnd);
+
+    const lengthDifference = formattedText.length - selectedText.length;
+
+    return {
+      text: newText,
+      start: start + lengthDifference,
+      end: end + lengthDifference,
+    };
+  }
+
+  //unformat
+  if (format.type === "escape") {
+    const selectedText = text.slice(start, end);
+
+    const escapedText = selectedText.replace(
+      /([\\`*_[\]{}()#+.!|>-])/g,
+      "\\$1",
+    );
+
+    const newText = text.slice(0, start) + escapedText + text.slice(end);
+
+    return {
+      text: newText,
+      start,
+      end: start + escapedText.length,
+    };
+  }
+
   return {
     text,
     start,

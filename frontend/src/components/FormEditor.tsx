@@ -1,8 +1,9 @@
-import { Check, Copy } from "lucide-react";
+import { BookOpenText, Check, Copy } from "lucide-react";
 
 import Container from "./Container";
 import EditorTextarea from "./EditorTextarea";
 import Icon from "./Icon";
+import sampleMarkdown from "../data/sampleMarkdown";
 
 type Selection = {
   start: number;
@@ -34,7 +35,23 @@ export default function FormEditor({
   copied,
 }: FormEditorProps) {
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
+    const textarea = event.target;
+
+    const scrollTop = textarea.scrollTop;
+    const scrollLeft = textarea.scrollLeft;
+
+    console.log({
+      selectionStart: textarea.selectionStart,
+      selectionEnd: textarea.selectionEnd,
+      scrollTop: textarea.scrollTop,
+    });
+
+    setText(textarea.value);
+
+    requestAnimationFrame(() => {
+      textarea.scrollTop = scrollTop;
+      textarea.scrollLeft = scrollLeft;
+    });
   };
 
   return (
@@ -43,17 +60,36 @@ export default function FormEditor({
         <div className="pl-3 pr-2 py-1 flex justify-between items-center">
           <h1 className="text-sm font-semibold p-2 text-text">editor</h1>
 
-          <button
-            type="button"
-            onClick={() => handleCopy(text)}
-            className="p-2 rounded-md hover:bg-border"
-            aria-label={copied ? "Copied" : "Copy markdown"}
-          >
-            <Icon
-              icon={copied ? Check : Copy}
-              color={copied ? "var(--color-green)" : "currentColor"}
-            />
-          </button>
+          <div className="flex">
+            <button
+              type="button"
+              onClick={() => {
+                if (text.trim() !== "") {
+                  const confirmed = window.confirm(
+                    "Continuing to the guide sheet would clear your current progress.",
+                  );
+
+                  if (!confirmed) return;
+                }
+
+                setText(sampleMarkdown);
+              }}
+              className="p-2 rounded-md hover:bg-border"
+            >
+              <Icon icon={BookOpenText} />
+            </button>
+            <button
+              type="button"
+              onClick={() => handleCopy(text)}
+              className="p-2 rounded-md hover:bg-border"
+              aria-label={copied ? "Copied" : "Copy markdown"}
+            >
+              <Icon
+                icon={copied ? Check : Copy}
+                color={copied ? "var(--color-green)" : "currentColor"}
+              />
+            </button>
+          </div>
         </div>
       }
     >

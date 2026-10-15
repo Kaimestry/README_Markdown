@@ -8,6 +8,15 @@ import {
   Heading3,
   SquareText,
   ChevronsLeftRightEllipsis,
+  Superscript,
+  Subscript,
+  Quote,
+  Link,
+  List,
+  ListOrdered,
+  SquareCheck,
+  StickyNoteX,
+  MessageCircleCode,
 } from "lucide-react";
 
 export const markdownFormats = {
@@ -34,6 +43,21 @@ export const markdownFormats = {
     after: "</ins>",
   },
 
+  subscript: {
+    label: "Subscript",
+    icon: Subscript,
+    type: "wrap",
+    before: "<sub>",
+    after: "</sub>",
+  },
+  superscript: {
+    label: "Superscript",
+    icon: Superscript,
+    type: "wrap",
+    before: "<sup>",
+    after: "</sup>",
+  },
+
   strikethrough: {
     label: "Strikethrough",
     icon: Strikethrough,
@@ -41,7 +65,19 @@ export const markdownFormats = {
     before: "~~",
     after: "~~",
   },
-
+  comment: {
+    label: "Comment",
+    icon: MessageCircleCode,
+    type: "wrap",
+    before: "<!--",
+    after: "-->",
+  },
+  escape: {
+    label: "Escape Markdown",
+    icon: StickyNoteX,
+    type: "escape",
+    before: "\\",
+  },
   "inline-code": {
     label: "Inline Code",
     icon: ChevronsLeftRightEllipsis,
@@ -77,5 +113,37 @@ export const markdownFormats = {
     type: "block",
     before: "```",
     after: "```",
+  },
+
+  quote: {
+    label: "Quote",
+    icon: Quote,
+    type: "quote",
+    before: "> ",
+  },
+
+  link: {
+    label: "Link",
+    icon: Link,
+    type: "link",
+  },
+
+  "unordered-list": {
+    label: "Unordered List",
+    icon: List,
+    type: "list",
+    marker: "- ",
+  },
+
+  "ordered-list": {
+    label: "Ordered List",
+    icon: ListOrdered,
+    type: "list",
+    marker: "1. ",
+  },
+  "task-list": {
+    label: "Task List",
+    icon: SquareCheck,
+    type: "task-list",
   },
 } as const;
