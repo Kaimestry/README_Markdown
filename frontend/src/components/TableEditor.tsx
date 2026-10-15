@@ -12,7 +12,7 @@ export default function TableEditor({
   onChange,
 }: TableEditorProps) {
   return (
-    <div className="overflow-auto border border-border">
+    <div className="max-h-80 overflow-x-auto overflow-y-auto border border-border">
       <table className="w-full border-collapse text-sm">
         <tbody>
           {Array.from({ length: rows }, (_, rowIndex) => (
@@ -27,7 +27,7 @@ export default function TableEditor({
                     }
                     className="
                         w-full
-                        min-w-32
+                        min-w-24
                         bg-transparent
                         px-3
                         py-2
@@ -37,7 +37,6 @@ export default function TableEditor({
                         placeholder:text-subtext
                         focus:bg-surface
                         text-center
-                        font-bold
                       "
                     placeholder={
                       rowIndex === 0 ? `Header ${columnIndex + 1}` : ""

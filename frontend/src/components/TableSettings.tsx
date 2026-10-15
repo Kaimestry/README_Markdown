@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 type TableSettingsProps = {
   rows: number;
   columns: number;
@@ -11,59 +13,73 @@ export default function TableSettings({
   onRowsChange,
   onColumnsChange,
 }: TableSettingsProps) {
+  const [rowInput, setRowInput] = useState(String(rows));
+  const [columnInput, setColumnInput] = useState(String(columns));
+
+  const rowsValid = rowInput !== "" && Number(rowInput) >= 1;
+  const columnsValid = columnInput !== "" && Number(columnInput) >= 1;
+
+  const handleRowsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+
+    setRowInput(value);
+
+    if (value !== "" && Number(value) >= 1) {
+      onRowsChange(Number(value));
+    }
+  };
+
+  const handleColumnsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+
+    setColumnInput(value);
+
+    if (value !== "" && Number(value) >= 1) {
+      onColumnsChange(Number(value));
+    }
+  };
+
   return (
     <div className="flex gap-5">
-      <label className="flex flex-1 flex-col gap-2">
-        <span className="text-sm text-text">Row amount</span>
-
+      <label className="flex flex-col gap-2 text-sm text-text">
+        Row amount
         <input
           type="number"
           min={1}
-          value={rows}
-          onChange={(event) =>
-            onRowsChange(Math.max(1, Number(event.target.value)))
-          }
-          className="
-            w-full
+          value={rowInput}
+          onChange={handleRowsChange}
+          className={`
+            w-24
             rounded-md
             border
-            border-border
             bg-background
             px-3
             py-2
-            text-sm
             text-text
             outline-none
-            focus:border-link
-          "
+            ${rowsValid ? "border-border" : "border-red-500"}
+          `}
         />
-
-        <span className="text-xs text-subtext">Includes the header row</span>
       </label>
 
-      <label className="flex flex-1 flex-col gap-2">
-        <span className="text-sm text-text">Column amount</span>
-
+      <label className="flex flex-col gap-2 text-sm text-text">
+        Column amount
         <input
           type="number"
           min={1}
-          value={columns}
-          onChange={(event) =>
-            onColumnsChange(Math.max(1, Number(event.target.value)))
-          }
-          className="
-            w-full
+          value={columnInput}
+          onChange={handleColumnsChange}
+          className={`
+            w-24
             rounded-md
             border
-            border-border
             bg-background
             px-3
             py-2
-            text-sm
             text-text
             outline-none
-            focus:border-link
-          "
+            ${columnsValid ? "border-border" : "border-red-500"}
+          `}
         />
       </label>
     </div>

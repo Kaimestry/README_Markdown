@@ -9,6 +9,8 @@ import useEditor from "../hooks/useEditor";
 export default function HomeScreen() {
   const [text, setText] = useState("");
   const [showTableModal, setShowTableModal] = useState(false);
+  const [tableRows, setTableRows] = useState(4);
+  const [tableColumns, setTableColumns] = useState(3);
 
   const {
     textareaRef,
@@ -48,10 +50,10 @@ export default function HomeScreen() {
 
       {showTableModal && (
         <TableModal
-          rows={4}
-          columns={3}
-          onRowsChange={() => {}}
-          onColumnsChange={() => {}}
+          rows={tableRows}
+          columns={tableColumns}
+          onRowsChange={setTableRows}
+          onColumnsChange={setTableColumns}
           onClose={() => setShowTableModal(false)}
           onInsert={() => {}}
         />

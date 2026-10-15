@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import Container from "./Container";
 import Icon from "./Icon";
 import TableSettings from "./TableSettings";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TableEditor from "./TableEditor";
 
 type TableModalProps = {
@@ -31,7 +31,22 @@ export default function TableModal({
   onClose,
   onInsert,
 }: TableModalProps) {
-  const [cells, setCells] = useState<string[][]>(createTableCells(4, 3));
+  const [cells, setCells] = useState<string[][]>(
+    createTableCells(rows, columns),
+  );
+  useEffect(() => {
+    setCells((current) =>
+      Array.from({ length: rows }, (_, row) =>
+        Array.from({ length: columns }, (_, column) => {
+          if (current[row]?.[column] !== undefined) {
+            return current[row][column];
+          }
+
+          return row === 0 ? `Header ${column + 1}` : "";
+        }),
+      ),
+    );
+  }, [rows, columns]);
   const handleCellChange = (row: number, column: number, value: string) => {
     setCells((current) => {
       const next = current.map((row) => [...row]);
