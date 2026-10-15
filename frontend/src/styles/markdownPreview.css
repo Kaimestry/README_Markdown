@@ -3,6 +3,9 @@
   line-height: 1.6;
 }
 
+/*=================
+HEADERS and p
+==================*/
 .markdown-preview h1,
 .markdown-preview h2,
 .markdown-preview h3,
@@ -13,9 +16,19 @@
   margin-bottom: 0.75rem;
   font-weight: 600;
 }
+.markdown-preview h1,
+.markdown-preview h2 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-border) 70%, transparent);
+}
 
 .markdown-preview h1 {
-  font-size: 1.75rem;
+  font-size: 2rem;
 }
 
 .markdown-preview h2 {
@@ -24,12 +37,45 @@
 
 .markdown-preview h3 {
   font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.markdown-preview h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.markdown-preview h5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.markdown-preview h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  color: var(--color-subtext);
 }
 
 .markdown-preview p {
-  margin: 0.75rem 0;
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
+/*=================
+Bold, italics, underline and strike
+==================*/
 .markdown-preview strong {
   font-weight: 700;
 }
@@ -51,6 +97,9 @@
   text-decoration: underline;
 }
 
+/*=================
+LISTS
+==================*/
 .markdown-preview ul,
 .markdown-preview ol {
   margin: 0.75rem 0;
@@ -69,11 +118,13 @@
   margin: 0.25rem 0;
 }
 
+/*=================
+TABLE
+==================*/
 .markdown-preview :not(pre) > code {
   padding: 0.15rem 0.35rem;
   border-radius: 0.25rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--color-inline);
   font-family: var(--font-code);
   font-size: 0.9em;
 }
@@ -82,8 +133,7 @@
   padding: 1rem;
   overflow-x: auto;
   border-radius: 0.5rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--color-inline);
 }
 
 .markdown-preview pre code {
@@ -92,24 +142,95 @@
   line-height: 1.5;
 }
 
+/* =================
+   Table
+   ================= */
+
 .markdown-preview table {
-  width: 100%;
   margin: 1rem 0;
   border-collapse: collapse;
+  max-width: 100%;
 }
 
 .markdown-preview th,
 .markdown-preview td {
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 1rem;
   border: 1px solid var(--color-border);
   text-align: left;
 }
 
 .markdown-preview th {
   font-weight: 600;
-  background: var(--color-surface);
+  text-align: center;
 }
 
-.markdown-preview ins {
-  text-decoration: underline;
+.markdown-preview tr:nth-child(even) {
+  background-color: var(--color-surface);
+}
+
+.markdown-preview tr:nth-child(odd) {
+  background-color: var(--color-background);
+}
+
+/* =================
+   Blockquote
+   ================= */
+
+.markdown-preview blockquote {
+  margin: 0 0 16px;
+  padding: 0 1em;
+  color: var(--color-subtext);
+  border-left: 0.25em solid var(--color-border);
+}
+
+/* =================
+   Task List
+   ================= */
+
+.markdown-preview .contains-task-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.markdown-preview .task-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.markdown-preview .task-list-item input[type="checkbox"] {
+  appearance: none;
+  flex-shrink: 0;
+
+  width: 14px;
+  height: 14px;
+
+  margin: 0.2rem 0 0;
+
+  border: 1px solid #626262;
+  border-radius: 2px;
+
+  background: #3b3b3b;
+}
+
+.markdown-preview .task-list-item input[type="checkbox"]:checked {
+  border-color: #757575;
+  background-color: #757575;
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%233b3b3b' d='m15.52053125 5.089125 -8.676375 8.676375c-0.4221625 0.4218875 -1.1063375 0.4218875 -1.5285 0L0.47608125 8.90024375c-0.42144375 -0.4220875 -0.42144375 -1.1057375 0 -1.527825l1.35145625 -1.3514625c0.42185625 -0.4200875 1.10394375 -0.4200875 1.5258 0l2.7536 2.6704875L12.6453 2.2334875c0.42193125 -0.4205375 1.10454375 -0.4205375 1.526475 0l1.34808125 1.32038125c0.42659375 0.4227375 0.4269 1.1121375 0.000675 1.53525625Z'/%3E%3C/svg%3E");
+
+  background-position: center;
+  background-size: 9px 67px;
+  background-repeat: no-repeat;
+}
+
+/* =================
+   Horizontal Rule
+   ================= */
+
+.markdown-preview hr {
+  height: 0;
+  margin: 24px 0;
+  border: 0;
+  border-top: 2px solid color-mix(in srgb, var(--color-text) 30%, transparent);
 }
